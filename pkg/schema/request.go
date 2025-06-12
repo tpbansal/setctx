@@ -1,30 +1,42 @@
 package schema
 
-// MCPRequest represents a basic JSON-RPC / MCP-compatible request
-// used for LLM tool calls or context-based evaluations.
+// MCPRequest represents the structure of an incoming JSON-RPC request
 type MCPRequest struct {
-	ID      string                 `json:"id"`
-	Method  string                 `json:"method"`
-	Params  map[string]interface{} `json:"params"`
-	Context map[string]interface{} `json:"context"`
+	ID     string                 `json:"id"`
+	Method string                 `json:"method"`
+	Params map[string]interface{} `json:"params"`
 }
 
-// Validate checks if the request has required fields and formats
+// Validate performs basic validation on the MCPRequest
 func Validate(req *MCPRequest) error {
-	if req.ID == "" || req.Method == "" {
-		return ErrInvalidRequest
+	if req.ID == "" {
+		return ErrMissingID
+	}
+	if req.Method == "" {
+		return ErrMissingMethod
+	}
+	if req.Params == nil {
+		return ErrMissingParams
 	}
 	return nil
 }
 
-// ErrInvalidRequest is returned when a request is malformed
-var ErrInvalidRequest = &ValidationError{"missing required fields: id or method"}
+// Error definitions
+var (
+	ErrMissingID     = NewValidationError("missing required field: id")
+	ErrMissingMethod = NewValidationError("missing required field: method")
+	ErrMissingParams = NewValidationError("missing required field: params")
+)
 
-// ValidationError represents a schema validation error
+// ValidationError represents a validation error
 type ValidationError struct {
-	Message string
+	message string
+}
+
+func NewValidationError(message string) error {
+	return &ValidationError{message: message}
 }
 
 func (e *ValidationError) Error() string {
-	return e.Message
+	return e.message
 }

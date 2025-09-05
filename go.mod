@@ -6,7 +6,7 @@ require (
 	github.com/coreos/go-oidc/v3 v3.9.0
 	github.com/crewjam/saml v0.4.14
 	github.com/golang-jwt/jwt/v5 v5.2.1
-	github.com/redis/go-redis/v9 v9.5.1
+	github.com/redis/go-redis/v9 v9.5.5
 	golang.org/x/oauth2 v0.17.0
 )
 

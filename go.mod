@@ -24,5 +24,5 @@ require (
 	github.com/russellhaering/goxmldsig v1.3.0 // indirect
 	golang.org/x/crypto v0.14.0 // indirect
 	google.golang.org/appengine v1.6.8 // indirect
-	google.golang.org/protobuf v1.31.0 // indirect
+	google.golang.org/protobuf v1.33.0 // indirect
 )
